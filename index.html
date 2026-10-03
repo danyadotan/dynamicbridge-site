@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="canonical" href="https://www.dynamicbridge.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bridge-iT">
+<meta property="og:description" content="Fix the environment, not the person. Bridge-iT builds the operational execution layer for people and AI agents.">
+<meta property="og:url" content="https://www.dynamicbridge.io/">
+<title>Bridge-iT</title>
+<meta name="description" content="Bridge-iT builds the operational execution layer: the environment around people and AI agents that carries intent to verified completion. Founded by Danya Dotan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500&family=JetBrains+Mono:wght@400;500&display=swap">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.dynamicbridge.io/#org",
+      "name": "Bridge-iT",
+      "alternateName": ["Dynamic Bridge", "Bridge-iT Technologies"],
+      "url": "https://www.dynamicbridge.io",
+      "email": "danya@dynamicbridge.io",
+      "description": "Bridge-iT builds the operational execution layer: the environment around people and AI agents that carries intent to verified completion. Dynamic Bridge is the platform underneath, an execution harness measured by verified closure.",
+      "founder": { "@id": "https://www.dynamicbridge.io/#danya" },
+      "location": { "@type": "Place", "name": "Tel Aviv, Israel" },
+      "sameAs": ["https://github.com/danyadotan"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.dynamicbridge.io/#danya",
+      "name": "Danya Dotan",
+      "jobTitle": "Founder & Systems Architect",
+      "worksFor": { "@id": "https://www.dynamicbridge.io/#org" },
+      "description": "Clinician with a decade of practice in CBT, ACT and DBT, specializing in executive function. Founder of Bridge-iT.",
+      "sameAs": ["https://github.com/danyadotan"]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "TAB@Work",
+      "url": "https://www.tab-4-good.com",
+      "applicationCategory": "BusinessApplication",
+      "description": "Execution infrastructure for AI-native organizations. Detects execution gaps, restores stalled work, and coordinates employees, managers and AI without replacing existing workflows.",
+      "publisher": { "@id": "https://www.dynamicbridge.io/#org" }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "StickiT",
+      "url": "https://stickit-hub.vercel.app",
+      "applicationCategory": "LifestyleApplication",
+      "description": "A physical execution trigger for the home: one point, one bounded loop, one completion condition.",
+      "publisher": { "@id": "https://www.dynamicbridge.io/#org" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "MentorTAB",
+      "codeRepository": "https://github.com/danyadotan/MentorTAB",
+      "description": "Research-grounded, in-the-moment coaching support for FIRST robotics mentors, in four languages, storing no children's data.",
+      "author": { "@id": "https://www.dynamicbridge.io/#danya" }
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "name": "Execution Hygiene Agent",
+      "codeRepository": "https://github.com/danyadotan/execution-hygiene-agent",
+      "license": "https://opensource.org/licenses/MIT",
+      "programmingLanguage": "TypeScript",
+      "description": "Open-source reference implementation of the human-attention layer of an agent harness: reduce human attention without reducing human authority.",
+      "author": { "@id": "https://www.dynamicbridge.io/#danya" }
+    }
+  ]
+}
+</script>
+<style>
+/* Layout: one reading column; the platform loop runs as a horizontal track of stations that stacks on phones; branches as a 5-cell lattice. */
+:root {
+  --ground: #F1F4F2;
+  --panel: #E6ECE8;
+  --ink: #14201B;
+  --muted: #56665F;
+  --rule: #CFD9D3;
+  --closure: #0B7A62;
+  --closure-soft: #D3EBE3;
+  --pending: #9A6A06;
+  --pending-soft: #F2E6C8;
+  --font-display: "Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Literata", Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0E1412; --panel: #17201C; --ink: #E4ECE8; --muted: #93A49C; --rule: #2A3732;
+    --closure: #46C4A3; --closure-soft: #15342B; --pending: #E0B44E; --pending-soft: #3A2F14;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #0E1412; --panel: #17201C; --ink: #E4ECE8; --muted: #93A49C; --rule: #2A3732;
+  --closure: #46C4A3; --closure-soft: #15342B; --pending: #E0B44E; --pending-soft: #3A2F14;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--ground); color: var(--ink);
+  font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.65;
+  padding-inline: 20px; padding-block: 0;
+}
+.wrap { max-width: 1040px; margin-inline: auto; }
+a { color: var(--closure); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--closure); outline-offset: 3px; border-radius: 2px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+.label {
+  font-family: var(--font-mono); font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+}
+.prose { max-width: 64ch; }
+
+/* header */
+.top { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: baseline; justify-content: space-between;
+  padding-block: 22px; border-bottom: 1px solid var(--rule); }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; color: var(--ink); text-decoration: none; }
+.brand small { font-family: var(--font-mono); font-weight: 400; font-size: .72rem; color: var(--muted); letter-spacing: .06em; margin-left: 8px; }
+.top nav { display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.top nav a { font-family: var(--font-mono); font-size: .78rem; color: var(--muted); text-decoration: none; }
+.top nav a:hover { color: var(--ink); }
+
+/* hero */
+.hero { padding-block: 72px 56px; display: grid; gap: 28px; position: relative; }
+.hero h1 { font-size: clamp(2.6rem, 7vw, 5.2rem); font-weight: 700; letter-spacing: -.02em; max-width: 14ch; }
+.hero h1 em { font-style: normal; color: var(--closure); }
+.hero .lede { font-size: 1.2rem; max-width: 58ch; }
+.byline { display: flex; flex-wrap: wrap; gap: 8px 22px; color: var(--muted); font-size: .95rem; }
+.byline strong { color: var(--ink); font-weight: 500; }
+
+section { padding-block: 56px; border-top: 1px solid var(--rule); display: grid; gap: 28px; }
+section > header { display: grid; gap: 10px; }
+section h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); font-weight: 600; }
+
+/* thesis */
+.thesis { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px 44px; }
+.thesis p { min-width: 0; }
+.pull { font-family: var(--font-display); font-size: 1.45rem; line-height: 1.3; font-weight: 500; border-left: 3px solid var(--closure); padding-left: 18px; }
+
+/* loop */
+.loop { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; counter-reset: st; }
+.loop li { position: relative; padding: 46px 14px 0 0; min-width: 0; }
+.loop li::before {
+  counter-increment: st; content: counter(st);
+  position: absolute; top: 0; left: 0; width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center; font-family: var(--font-mono); font-size: .8rem;
+  background: var(--ground); border: 1.5px solid var(--ink); color: var(--ink); z-index: 1;
+}
+.loop li::after { content: ""; position: absolute; top: 15px; left: 30px; right: 0; border-top: 1.5px solid var(--ink); }
+.loop li:last-child::before { content: "✓"; background: var(--closure); border-color: var(--closure); color: var(--ground); }
+.loop li:last-child::after { display: none; }
+.loop b { display: block; font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; margin-bottom: 4px; }
+.loop span { font-size: .9rem; color: var(--muted); line-height: 1.5; display: block; }
+@media (max-width: 760px) {
+  .loop { grid-template-columns: 1fr; }
+  .loop li { padding: 0 0 22px 48px; }
+  .loop li::after { top: 30px; bottom: 0; left: 15px; right: auto; border-top: 0; border-left: 1.5px solid var(--ink); }
+}
+.measures { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.measure { background: var(--panel); padding: 18px 20px; display: grid; gap: 6px; min-width: 0; }
+.measure h3 { font-size: 1.05rem; font-weight: 600; }
+.measure p { font-size: .93rem; color: var(--muted); }
+.measure code { font-family: var(--font-mono); font-size: .85em; color: var(--ink); }
+
+/* branches */
+.branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+.branch { border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 22px 22px 24px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.branch > .label { color: var(--ink); }
+.proj { display: grid; gap: 6px; }
+.proj h3 { font-size: 1.2rem; font-weight: 600; display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
+.proj p { font-size: .95rem; }
+.proj .go { font-family: var(--font-mono); font-size: .8rem; }
+.chip { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+.chip.live { background: var(--closure-soft); color: var(--closure); }
+.chip.wip { background: var(--pending-soft); color: var(--pending); }
+.branch.empty { background: repeating-linear-gradient(135deg, transparent 0 10px, var(--panel) 10px 11px); }
+.branch.empty p { color: var(--muted); font-size: .95rem; }
+
+/* principles */
+.principles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px 44px; }
+.principles li { display: grid; gap: 6px; min-width: 0; }
+.principles b { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; line-height: 1.25; }
+.principles span { color: var(--muted); font-size: .95rem; }
+
+/* evolution */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+.timeline li { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 18px; padding-block: 16px; border-bottom: 1px solid var(--rule); }
+.timeline time { font-family: var(--font-mono); font-size: .82rem; color: var(--muted); padding-top: 3px; font-variant-numeric: tabular-nums; }
+.timeline b { font-family: var(--font-display); font-weight: 600; font-size: 1.08rem; display: block; }
+.timeline span { font-size: .95rem; color: var(--muted); }
+@media (max-width: 520px) { .timeline li { grid-template-columns: 1fr; gap: 4px; } }
+
+/* contact */
+.contact { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; }
+.mail { font-family: var(--font-mono); font-size: 1.05rem; user-select: all; }
+.copy { font-family: var(--font-mono); font-size: .78rem; background: transparent; color: var(--ink); border: 1px solid var(--ink); padding: 6px 12px; cursor: pointer; border-radius: 3px; }
+.copy:hover { background: var(--ink); color: var(--ground); }
+footer { padding-block: 28px 40px; border-top: 1px solid var(--rule); color: var(--muted); font-size: .85rem; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+@media (prefers-reduced-motion: no-preference) { .copy { transition: background .15s, color .15s; } }
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#top">Bridge-iT<small>on Dynamic Bridge</small></a>
+    <nav aria-label="Sections">
+      <a href="#thesis">Thesis</a>
+      <a href="#platform">Platform</a>
+      <a href="#branches">Branches</a>
+      <a href="#principles">Principles</a>
+      <a href="#evolution">Evolution</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero" id="top">
+    <p class="label">Operational execution layer</p>
+    <h1>Fix the environment, <em>not the person.</em></h1>
+    <p class="lede">Bridge-iT builds the environment around people and AI agents that carries intent all the way to a verified, finished state. Dynamic Bridge is the platform underneath: an execution harness that every Bridge-iT product runs on.</p>
+    <p class="byline"><span>Founded by <strong>Danya Dotan</strong></span><span>Clinician (CBT · ACT · DBT, executive function) and systems architect</span><span>Tel Aviv</span></p>
+  </div>
+
+  <section id="thesis" aria-labelledby="thesis-h">
+    <header><p class="label">Thesis</p><h2 id="thesis-h">A model is potential. The environment decides what it becomes.</h2></header>
+    <div class="thesis">
+      <p>A child who plays piano seven hours a day becomes a conservatory talent. The same child, raised outdoors by adults who make room for him, learns to read weather, animals and danger. The potential is the same. The environment is at least half of the outcome.</p>
+      <p>AI agents work the same way. The field now calls the surrounding structure a <em>harness</em> and describes it as <em>scaffolding</em>, a term that comes from developmental psychology (Wood, Bruner &amp; Ross, 1976). One difference matters: a child internalizes the scaffold, a model does not. Remove the harness and the model starts over. For agents, the environment is a permanent condition, so it should be built as infrastructure.</p>
+      <p class="pull">Most teams build a harness around the model. Bridge-iT builds one on both sides of the loop: around the agent, and around the person who has to approve, decide and live with the result.</p>
+    </div>
+  </section>
+
+  <section id="platform" aria-labelledby="platform-h">
+    <header><p class="label">Platform · Dynamic Bridge</p><h2 id="platform-h">One loop, end to end, closed by verification</h2>
+      <p class="prose">Every Bridge-iT product runs the same loop. A step only counts as done when the real-world state has been checked, not when a model says so.</p></header>
+    <ol class="loop">
+      <li><b>Intent enters</b><span>A goal, a request, a policy, with the authority attached to it.</span></li>
+      <li><b>Verify</b><span>Generated work is checked against tests, baselines and the source of truth before anyone reads it.</span></li>
+      <li><b>Hygiene</b><span>Policy decides what deserves human attention and what passes on its own.</span></li>
+      <li><b>Human judgment</b><span>Only decisions that need real authority reach a person.</span></li>
+      <li><b>Governed execution</b><span>Authorized actions run, survive interruptions and never duplicate.</span></li>
+      <li><b>Verified closure</b><span>The final state is confirmed against the source of truth.</span></li>
+    </ol>
+    <div class="measures">
+      <div class="measure"><h3>Verified Completion Reliability</h3><p>Share of workflows that reach their intended state and verify it, with no lost context, permission, handoff or recovery failure.</p></div>
+      <div class="measure"><h3>Human Decision Load</h3><p>How many human decisions, checks and approvals it took to close one unit of work. Reliability should not move the load back onto people.</p></div>
+      <div class="measure"><h3>Open reference</h3><p>The attention layer is published as <a href="https://github.com/danyadotan/execution-hygiene-agent">Execution Hygiene Agent</a>, MIT licensed, with tests: <code>auto_pass</code>, <code>surface</code>, <code>require_approval</code>, <code>escalate</code>.</p></div>
+    </div>
+  </section>
+
+  <section id="branches" aria-labelledby="branches-h">
+    <header><p class="label">Branches</p><h2 id="branches-h">Where the loop runs</h2>
+      <p class="prose">One platform, several arenas of a person's life. Some branches already have working products; others are in research.</p></header>
+    <div class="branches">
+      <div class="branch">
+        <p class="label">Work</p>
+        <div class="proj">
+          <h3>TAB@Work <span class="chip live">Live demo</span></h3>
+          <p>Execution infrastructure for AI-native organizations. Detects execution gaps, restores stalled work, and coordinates employees, managers and AI without replacing existing workflows.</p>
+          <a class="go" href="https://www.tab-4-good.com">tab-4-good.com →</a>
+        </div>
+      </div>
+      <div class="branch">
+        <p class="label">Home &amp; family</p>
+        <div class="proj">
+          <h3>StickiT <span class="chip live">Live demo</span></h3>
+          <p>A physical execution trigger for the home: one point, one bounded loop, one completion condition. Every person in the house carries their own permissions. No loop, no sticker.</p>
+          <a class="go" href="https://stickit-hub.vercel.app">stickit-hub.vercel.app →</a>
+        </div>
+        <div class="proj">
+          <h3>Ima'le <span class="chip wip">In validation</span></h3>
+          <p>A Hebrew parent-action navigator that turns a hard parenting moment into a clear next action, grounded in clinical protocols.</p>
+        </div>
+      </div>
+      <div class="branch">
+        <p class="label">Education</p>
+        <div class="proj">
+          <h3>MentorTAB <span class="chip live">Open source</span></h3>
+          <p>In-the-moment, research-grounded coaching for FIRST robotics mentors. Four languages, and it stores no children's data. Built in a four-hour sprint with 8200 and Base44.</p>
+          <a class="go" href="https://github.com/danyadotan/MentorTAB">github.com/danyadotan/MentorTAB →</a>
+        </div>
+      </div>
+      <div class="branch">
+        <p class="label">Finance &amp; safety</p>
+        <div class="proj">
+          <h3>TAB@Anti-Scam <span class="chip wip">Prototype</span></h3>
+          <p>Real-time voice protection for older adults during phone scams. The elder invites a protective voice into the call; TAB speaks for what the elder started. Built end to end at the 8200 Social Hackathon.</p>
+          <!-- TODO: add the new demo link here -->
+        </div>
+      </div>
+      <div class="branch empty">
+        <p class="label">Health</p>
+        <p>In research. The same loop, applied to care: support that stands beside one person and closes the gap between knowing what to do and getting it done.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="principles" aria-labelledby="principles-h">
+    <header><p class="label">Principles</p><h2 id="principles-h">What holds in every product</h2></header>
+    <ul class="principles">
+      <li><b>Fix the environment, not the person.</b><span>When work stalls, the first suspect is the structure around it.</span></li>
+      <li><b>Reduce attention without reducing authority.</b><span>People see less, and still decide everything that needs a decision.</span></li>
+      <li><b>Completion is a verified state, not a model claim.</b><span>Done means checked against the source of truth.</span></li>
+      <li><b>Bypass, don't alert.</b><span>Route around friction before work stalls, instead of adding another notification.</span></li>
+      <li><b>Private by architecture.</b><span>Personal agents stay loyal to the person. The system reads workflow friction, never emotion.</span></li>
+      <li><b>Control as a checkpoint, not a constant.</b><span>Set boundaries once, review them on a schedule, and let the loop run.</span></li>
+    </ul>
+  </section>
+
+  <section id="evolution" aria-labelledby="evolution-h">
+    <header><p class="label">Evolution</p><h2 id="evolution-h">How the thesis got here</h2></header>
+    <ol class="timeline">
+      <li><time datetime="2025-11">Nov 2025</time><div><b>Orchestration first</b><span>The orchestration layer, one executor behind many capabilities, documented as the core of the architecture.</span></div></li>
+      <li><time datetime="2026-05">May 2026</time><div><b>Adaptive Human Infrastructure</b><span>Policy paper submitted to the Israel Innovation Authority in response to the draft national AI strategy. <a href="https://www.dynamicbridge.io/adaptive-human-infrastructure.pdf">Read the PDF</a></span></div></li>
+      <li><time datetime="2026-05">May 2026</time><div><b>The human layer for the AI era</b><span>The first public thesis: missing infrastructure, not a personal problem. <a href="/human-layer">Read the original</a></span></div></li>
+      <li><time datetime="2026-07">Jul 2026</time><div><b>TAB@Anti-Scam</b><span>A real-time voice protection system built end to end at the 8200 Social Hackathon.</span></div></li>
+      <li><time datetime="2026">2026</time><div><b>Execution Hygiene Agent v0.1.0</b><span>The attention layer released as open source, with tests.</span></div></li>
+      <li><time datetime="2026-10">Oct 2026</time><div><b>The operational execution layer</b><span>The thesis in its current form: a harness for organizational work, measured by verified closure.</span></div></li>
+    </ol>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h">
+    <header><p class="label">Contact</p><h2 id="contact-h">Builders, investors, clinicians, policy makers</h2>
+      <p class="prose">If the layer described here is one you want to help build, write directly.</p></header>
+    <div class="contact">
+      <span class="mail" id="mail">danya@dynamicbridge.io</span>
+      <button class="copy" id="copy-mail" type="button">Copy address</button>
+      <a class="go" href="https://github.com/danyadotan">github.com/danyadotan →</a>
+    </div>
+  </section>
+
+  <footer><span>Bridge-iT · Dynamic Bridge · Israel</span><span>dynamicbridge.io · 2026</span></footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById('copy-mail');
+  var mail = document.getElementById('mail');
+  btn.addEventListener('click', function () {
+    var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy address'; }, 1600); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Selected, press Ctrl+C';
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(mail.textContent.trim()).then(done, fallback);
+      } else { fallback(); }
+    } catch (e) { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
