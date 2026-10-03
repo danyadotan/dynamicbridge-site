@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/human-layer", "destination": "https://bridge-it-thesis-52026.vercel.app/" },
+    { "source": "/adaptive-human-infrastructure.pdf", "destination": "https://bridge-it-thesis-52026.vercel.app/adaptive-human-infrastructure.pdf" }
+  ]
+}
